@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\API\Register;
+use App\Http\Controllers\API\Room;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('register', [Register::class, 'register']);
+Route::post('login', [Register::class, 'login']);
+     
+Route::middleware('auth:api')->group( function () {
+    Route::resource('room', Room::class);
 });
